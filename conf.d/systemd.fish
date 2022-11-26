@@ -10,6 +10,10 @@ function eu
     sudo nano /usr/lib/systemd/system/$argv[1].service
     sudo systemctl daemon-reload
 end
+function et
+    sudo nano /usr/lib/systemd/system/$argv[1].timer
+    sudo systemctl daemon-reload
+end
 function ru
     sudo systemctl restart $argv[1]
     sudo journalctl -u $argv[1] -f

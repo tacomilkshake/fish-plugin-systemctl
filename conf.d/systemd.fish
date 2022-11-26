@@ -1,26 +1,29 @@
-alias ssc 'sudo systemctl'
-alias ssce 'sudo systemctl enable'
-alias sscd 'sudo systemctl disable'
-alias sscs 'sudo systemctl start'
-alias ssct 'sudo systemctl stop'
-alias sscr 'sudo systemctl restart'
-alias sscst 'sudo systemctl status'
-alias sscdr 'sudo systemctl daemon-reload'
-function eu
+# Aliases
+alias sc 'sudo systemctl'
+alias sce 'sudo systemctl enable'
+alias scd 'sudo systemctl disable'
+alias scs 'sudo systemctl start'
+alias sct 'sudo systemctl stop'
+alias scr 'sudo systemctl restart'
+alias scst 'sudo systemctl status'
+alias scdr 'sudo systemctl daemon-reload'
+
+function eu # Edit unit file and reload daemon
     sudo nano /usr/lib/systemd/system/$argv[1].service
     sudo systemctl daemon-reload
 end
-function et
+
+function et # Edit timer file and reload daemon
     sudo nano /usr/lib/systemd/system/$argv[1].timer
     sudo systemctl daemon-reload
 end
-function ru
+
+function ru # Reload unit file and follow logs
     sudo systemctl restart $argv[1]
     sudo journalctl -u $argv[1] -f
 end
 
-function sc
-    echo "Service Check"
+function sch # Perform a service check
     for SERVICE in $argv
         if sudo systemctl is-active $SERVICE --quiet
             echo 🟢 $SERVICE is active.
@@ -30,8 +33,7 @@ function sc
     end
 end
 
-function rc
-    echo "Restart Check"
+function rch # Restart services and perform a service check
     for SERVICE in $argv
         if sudo systemctl is-active $SERVICE --quiet
             echo 🟢 $SERVICE is active, restarting...

@@ -1,20 +1,15 @@
 # Aliases
-alias sc 'sudo systemctl'
-alias sce 'sudo systemctl enable'
-alias scd 'sudo systemctl disable'
-alias scs 'sudo systemctl start'
-alias sct 'sudo systemctl stop'
-alias scr 'sudo systemctl restart'
-alias scst 'sudo systemctl status'
-alias scdr 'sudo systemctl daemon-reload'
+alias ssc 'sudo systemctl'
+alias ssce 'sudo systemctl enable'
+alias sscd 'sudo systemctl disable'
+alias sscs 'sudo systemctl start'
+alias ssct 'sudo systemctl stop'
+alias sscr 'sudo systemctl restart'
+alias sscst 'sudo systemctl status'
+alias sscdr 'sudo systemctl daemon-reload'
 
 function eu # Edit unit file and reload daemon
-    sudo nano /usr/lib/systemd/system/$argv[1].service
-    sudo systemctl daemon-reload
-end
-
-function et # Edit timer file and reload daemon
-    sudo nano /usr/lib/systemd/system/$argv[1].timer
+    sudo nano /usr/lib/systemd/system/$argv[1]
     sudo systemctl daemon-reload
 end
 
